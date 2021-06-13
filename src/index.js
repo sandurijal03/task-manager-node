@@ -1,8 +1,11 @@
 import express from 'express';
+import tasksRouter from './routes/tasks';
 
 const server = async () => {
   try {
     const app = express();
+    app.use('/api/v1/tasks', tasksRouter);
+
     app.get('/', (req, res) => {
       res.json('hello world');
     });
