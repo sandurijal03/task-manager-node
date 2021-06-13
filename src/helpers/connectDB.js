@@ -1,8 +1,8 @@
-import { connect } from 'mongoose';
+import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    await connect(`${process.env.DB_URI}/${process.env.DB_NAME}`, {
+    await mongoose.connect(`${process.env.DB_URI}/${process.env.DB_NAME}`, {
       useCreateIndex: true,
       useFindAndModify: false,
       useNewUrlParser: true,

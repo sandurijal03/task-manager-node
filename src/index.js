@@ -1,8 +1,10 @@
 import express from 'express';
+import connectDB from './helpers/connectDB';
 import tasksRouter from './routes/tasks';
 
 const server = async () => {
   try {
+    await connectDB();
     const app = express();
     app.use('/api/v1/tasks', tasksRouter);
 
