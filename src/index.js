@@ -1,4 +1,6 @@
 import express from 'express';
+import path from 'path';
+
 import connectDB from './helpers/connectDB';
 import tasksRouter from './routes/tasks';
 
@@ -7,6 +9,7 @@ const server = async () => {
     await connectDB();
     const app = express();
     app.use(express.json());
+    app.use(express.static(path.join(__dirname, './public')));
 
     app.use('/api/v1/tasks', tasksRouter);
 
