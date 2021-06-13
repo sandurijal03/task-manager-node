@@ -4,6 +4,7 @@ import path from 'path';
 import connectDB from './helpers/connectDB';
 import notFound from './middlewares/not-found';
 import tasksRouter from './routes/tasks';
+import errorHandler from './middlewares/errorHandler';
 
 const server = async () => {
   try {
@@ -14,6 +15,7 @@ const server = async () => {
 
     app.use('/api/v1/tasks', tasksRouter);
     app.use(notFound);
+    app.use(errorHandler);
 
     const port = process.env.PORT || 3001;
     app.listen(port, () => console.log(`listening to server on port ${port}`));

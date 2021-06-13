@@ -1,5 +1,6 @@
 import Task from '../models/Task';
 import asyncWrapper from '../middlewares/async';
+import { createCustomError } from '../errors/customError';
 
 export const getAllTask = asyncWrapper(async (req, res, next) => {
   const tasks = await Task.find();
@@ -22,7 +23,7 @@ export const getTask = asyncWrapper(async (req, res, next) => {
   const task = await Task.findOne({ _id: taskId });
 
   if (!task) {
-    return res.status(404).json({ msg: 'No any task with that id' });
+    return next(createCustomError(`No task with Id ${taskId}`, 404));
   }
 
   return res.status(200).json({ task });
@@ -37,7 +38,7 @@ export const updateTask = asyncWrapper(async (req, res, next) => {
   });
 
   if (!task) {
-    return res.status(404).json({ msg: 'No any task with that id' });
+    return next(createCustomError(`No task with Id ${taskId}`, 404));
   }
 
   return res.status(200).json({ task });
@@ -48,7 +49,7 @@ export const removeTask = asyncWrapper(async (req, res, next) => {
   const task = await Task.findOneAndDelete({ _id: taskId });
 
   if (!task) {
-    return res.status(404).json({ msg: 'No any task with that id' });
+    return next(createCustomError(`No task with Id ${taskId}`, 404));
   }
 
   return res.status(200).json({ task });
