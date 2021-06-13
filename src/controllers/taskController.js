@@ -1,7 +1,12 @@
 import Task from '../models/Task';
 
-export const getAllTask = (req, res, next) => {
-  res.status(200).json('all tasks');
+export const getAllTask = async (req, res, next) => {
+  try {
+    const tasks = await Task.find();
+    return res.status(200).json(tasks);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };
 
 export const createTask = async (req, res, next) => {
@@ -18,7 +23,15 @@ export const createTask = async (req, res, next) => {
   }
 };
 
-export const getTask = (req, res, next) => {};
+export const getTask = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const task = await Task.findById(id);
+    return res.status(200).json(task);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
 
 export const updateTask = (req, res, next) => {};
 
