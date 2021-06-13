@@ -27,6 +27,11 @@ export const getTask = async (req, res, next) => {
   try {
     const { id } = req.params;
     const task = await Task.findById(id);
+
+    if (!task) {
+      return res.status(404).json({ msg: 'No any task with that id' });
+    }
+
     return res.status(200).json(task);
   } catch (err) {
     return res.status(500).json({ msg: err });
