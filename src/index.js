@@ -6,11 +6,9 @@ const server = async () => {
   try {
     await connectDB();
     const app = express();
-    app.use('/api/v1/tasks', tasksRouter);
+    app.use(express.json());
 
-    app.get('/', (req, res) => {
-      res.json('hello world');
-    });
+    app.use('/api/v1/tasks', tasksRouter);
 
     const port = process.env.PORT || 3001;
     app.listen(port, () => console.log(`listening to server on port ${port}`));
