@@ -3,7 +3,7 @@ import Task from '../models/Task';
 export const getAllTask = async (req, res, next) => {
   try {
     const tasks = await Task.find();
-    return res.status(200).json({ tasks });
+    return res.status(200).json({ tasks, success: true, amount: tasks.length });
   } catch (err) {
     return res.status(500).json({ msg: err });
   }
@@ -43,7 +43,10 @@ export const updateTask = async (req, res, next) => {
   try {
     const { taskId } = req.params;
 
-    const task = await Task.findByIdAndUpdate(taskId, req.body, { new: true });
+    const task = await Task.findByIdAndUpdate(taskId, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!task) {
       return res.status(404).json({ msg: 'No any task with that id' });
