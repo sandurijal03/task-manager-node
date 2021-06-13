@@ -1,11 +1,11 @@
-export const getTodos = (req, res, next) => {
+export const getAllTask = (req, res, next) => {
   res.status(200).json('all tasks');
 };
 
-export const createTodo = (req, res, next) => {};
+export const createTask = (req, res, next) => {};
 
-export const getTodo = (req, res, next) => {};
+export const getTask = (req, res, next) => {};
 
-export const updateTodo = (req, res, next) => {};
+export const updateTask = (req, res, next) => {};
 
-export const removeTodo = (req, res, next) => {};
+export const removeTask = (req, res, next) => {};
